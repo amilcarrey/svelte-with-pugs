@@ -1,15 +1,21 @@
-<script>    
-    import Card from "./Card"
+<script>
+  import Card from "./Card";
+  export let posts = [];
 </script>
-
-<div class="Timeline">
-  <div class="Timeline-container">
-    <Card />
-  </div>
-</div>
 
 <style>
   .TimeLine {
     padding: 4em 0 0 0;
   }
 </style>
+
+<div class="Timeline">
+  <div class="Timeline-container">
+    {#each posts as post}
+      <Card {...post}/>
+    {:else}
+      <p>Loading...</p>
+    {/each}
+
+  </div>
+</div>

@@ -2,15 +2,10 @@
   import Profile from "./Profile";
   import Stories from "./Stories";
   import Footer from "./Footer";
-</script>
 
-<div class="Sidebar">
-  <div class="Sidebar-container">
-    <Profile />
-    <Stories />
-    <Footer />
-  </div>
-</div>
+  export let nickname;
+  export let name;
+</script>
 
 <style>
   .Sidebar {
@@ -21,3 +16,11 @@
     position: fixed;
   }
 </style>
+
+<div class="Sidebar">
+  <div class="Sidebar-container">
+    <Profile {nickname} {name} />
+    <Stories />
+    <Footer />
+  </div>
+</div>

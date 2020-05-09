@@ -1,5 +1,11 @@
 <script>
   import Comments from "./Comments";
+  export let username = '';
+  export let location;
+  export let photo;
+  export let postComments
+  export let comments;
+  export let avatar;
 </script>
 
 <style>
@@ -119,7 +125,7 @@
   <div class="Card-container">
     <div class="Card-Header">
       <div class="Card-user">
-        <img src="http://arepa.s3.amnazonaws.com/elmo002.jpg" alt="" />
+        <img src={avatar} alt={username} />
         <h2>
           Elmo.pug
           <span>Munro, Buenos Aires</span>
@@ -131,7 +137,7 @@
     </div>
     <div class="Card-photo">
       <figure>
-        <img src="https://lh3.googleusercontent.com/proxy/1FHpCmZ6W8tr6IyVI_YVsS8q_F_BagPwrJPd82USyDGjv9c7rQMO65X3Pt7ANVtRpqdpTUemGDQM7gH4RQ0mlXR88dLVaKfdII2DjVG1EBFYrFTjf1_6GJku45N49Qk" alt="" />
+        <img src={photo} alt={username} />
       </figure>
     </div>
     <div class="Card-icons">
@@ -144,9 +150,9 @@
       </div>
     </div>
     <div class="Card-description">
-      <h3>amilcarrey</h3>
-      <span>Hola que onda</span>
+      <h3>{username}</h3>
+      <span>{postComments}</span>
     </div>
-    <Comments />
+    <Comments {comments}/>
   </div>
 </div>
