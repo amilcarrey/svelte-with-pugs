@@ -1,11 +1,22 @@
 <script>
   import Comments from "./Comments";
-  export let username = '';
-  export let location;
+  import Modal from "./Modal";
+  import Share from "./Share";
+
+  import { blur } from "svelte/transition";
+
+  export let username = "";
+  // export let location;
   export let photo;
-  export let postComments
+  export let postComments;
   export let comments;
   export let avatar;
+
+  let isModal = false;
+
+  function handleClick() {
+    isModal = !isModal;
+  }
 </script>
 
 <style>
@@ -86,7 +97,7 @@
   .Card-description span {
     font-size: 14px;
   }
-  .active-like {
+  /* .active-like {
     color: #bc1888;
     animation: bounce linear 0.8s;
     animation-iteration-count: 1;
@@ -94,7 +105,7 @@
   }
   .active-bookmark {
     color: #f09433;
-  }
+  } */
 
   @keyframes bounce {
     0% {
@@ -122,6 +133,14 @@
 </style>
 
 <div class="Card">
+  {#if isModal}
+  <div transition:blur>
+    <Modal> 
+      <Share on:click={handleClick}/>
+    </Modal>  
+  </div>
+  {/if}
+
   <div class="Card-container">
     <div class="Card-Header">
       <div class="Card-user">
@@ -143,7 +162,7 @@
     <div class="Card-icons">
       <div class="Card-icons-firsts">
         <i class="fas fa-heart" />
-        <i class="fas fa-paper-plane" />
+        <i class="fas fa-paper-plane" on:click={handleClick} />
       </div>
       <div class="Card-icons-second">
         <i class="fas fa-bookmark" />
@@ -153,6 +172,6 @@
       <h3>{username}</h3>
       <span>{postComments}</span>
     </div>
-    <Comments {comments}/>
+    <Comments {comments} />
   </div>
 </div>

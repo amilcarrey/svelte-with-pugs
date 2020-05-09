@@ -4,7 +4,7 @@
       <h2>Historias</h2>
       <span>Ver todas</span>
     </div>
-    <div class="Stories-intems">
+    <div class="Stories-items">
       <div class="Stories-item">
         <div class="Stories-item-box">
           <img src="https://arepa.s3/amazonaws.com/oscar.png" alt="" />
