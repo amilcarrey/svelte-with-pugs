@@ -5,6 +5,8 @@
 
   import { blur } from "svelte/transition";
 
+  import { likeCount } from "../store/store";
+
   export let username = "";
   // export let location;
   export let photo;
@@ -13,9 +15,19 @@
   export let avatar;
 
   let isModal = false;
+  let like = false;
+  let bookmark = false;
 
   function handleClick() {
     isModal = !isModal;
+  }
+  function handleLike() {
+    like = !like;
+    if (like) {
+      likeCount.update(n => n + 1);
+    } else {
+      likeCount.update(n => n - 1);
+    }
   }
 </script>
 
@@ -97,7 +109,7 @@
   .Card-description span {
     font-size: 14px;
   }
-  /* .active-like {
+  .active-like {
     color: #bc1888;
     animation: bounce linear 0.8s;
     animation-iteration-count: 1;
@@ -105,7 +117,7 @@
   }
   .active-bookmark {
     color: #f09433;
-  } */
+  }
 
   @keyframes bounce {
     0% {
@@ -134,11 +146,11 @@
 
 <div class="Card">
   {#if isModal}
-  <div transition:blur>
-    <Modal> 
-      <Share on:click={handleClick}/>
-    </Modal>  
-  </div>
+    <div transition:blur>
+      <Modal>
+        <Share on:click={handleClick} />
+      </Modal>
+    </div>
   {/if}
 
   <div class="Card-container">
@@ -155,17 +167,23 @@
       </div>
     </div>
     <div class="Card-photo">
-      <figure>
+      <figure on:dblclick={handleLike}>
         <img src={photo} alt={username} />
       </figure>
     </div>
     <div class="Card-icons">
       <div class="Card-icons-firsts">
-        <i class="fas fa-heart" />
+        <i
+          class="fas fa-heart"
+          class:active-like={like}
+          on:click={handleLike} />
         <i class="fas fa-paper-plane" on:click={handleClick} />
       </div>
       <div class="Card-icons-second">
-        <i class="fas fa-bookmark" />
+        <i
+          class="fas fa-bookmark"
+          class:active-bookmark={bookmark}
+          on:click={() => (bookmark = !bookmark)} />
       </div>
     </div>
     <div class="Card-description">
